@@ -13,8 +13,11 @@ const AuthenticationModal = () => {
      const toggle = () => setModal(!modal);
   
     return (
-        <Modal isOpen={ modal } toggle={ toggle } className="authenticationModal">
-            <ModalHeader toggle={ toggle }>Login</ModalHeader>
+        <Modal isOpen={ modal } toggle={ toggle } className="authenticationModal" centered>
+            <ModalHeader toggle={ toggle }>
+                {isLoginForm && 'Login'}
+                {isSignUpForm && 'Sign Up'}
+            </ModalHeader>
             <ModalBody>
                 { !isLoginForm && !isSignUpForm && 
                 <>
