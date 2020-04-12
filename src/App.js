@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import SignUpModal from './components/SignUpModal/SignUpModal'
+import AuthenticationModal from './components/authenticationModal';
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
           <header className="App-header">
               Dunkees
           </header>
-          <SignUpModal></SignUpModal>
+          <AuthenticationModal></AuthenticationModal>
       </div>
   );
 }

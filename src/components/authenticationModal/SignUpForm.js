@@ -2,7 +2,30 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Button, Form, FormGroup, Input,FormFeedback } from 'reactstrap';
-const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+import constants from '../../utils/constants';
+import { signUp } from '../../services/authenticationServices';
+
+const { phoneRegExp } =constants;
+const validationSchema= Yup.object({
+  firstName: Yup.string()
+    .max(15, 'Must be 15 characters or less')
+    .required('This field is required'),
+  lastName: Yup.string()
+    .max(20, 'Must be 20 characters or less')
+    .required('This field is required'),
+  email: Yup.string()
+    .email('Invalid email address')
+    .required('This field is required'),
+  mobileNumber:Yup.string().matches(phoneRegExp, 'Phone number is not valid').required('This field is required'),
+  password: Yup.string().required('This field is required'),
+  confirmPassword:Yup.string().when('password', {
+    is: val => (val && val.length > 0 ? true : false),
+    then: Yup.string().oneOf(
+      [ Yup.ref('password') ],
+      'Both password need to be the same'
+    )
+  }).required('This field is required'),
+});
 
 const SignUpForm = () => {
   const formik = useFormik({
@@ -14,28 +37,9 @@ const SignUpForm = () => {
       password:'',
       confirmPassword:'',
     },
-    validationSchema: Yup.object({
-      firstName: Yup.string()
-        .max(15, 'Must be 15 characters or less')
-        .required('This field is required'),
-      lastName: Yup.string()
-        .max(20, 'Must be 20 characters or less')
-        .required('This field is required'),
-      email: Yup.string()
-        .email('Invalid email address')
-        .required('This field is required'),
-      mobileNumber:Yup.string().matches(phoneRegExp, 'Phone number is not valid').required('This field is required'),
-      password: Yup.string().required('This field is required'),
-      confirmPassword:Yup.string().when('password', {
-        is: val => (val && val.length > 0 ? true : false),
-        then: Yup.string().oneOf(
-          [ Yup.ref('password') ],
-          'Both password need to be the same'
-        )
-      }).required('This field is required'),
-    }),
+    validationSchema,
     onSubmit: values => {
-     console.log('val',values)
+      signUp({ values });
     },
   });
 
