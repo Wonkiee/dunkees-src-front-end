@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import SignUpModal from './components/SignUpModal/SignUpModal'
 
 function App() {
   return (
@@ -8,6 +8,7 @@ function App() {
           <header className="App-header">
               Dunkees
           </header>
+          <SignUpModal></SignUpModal>
       </div>
   );
 }
