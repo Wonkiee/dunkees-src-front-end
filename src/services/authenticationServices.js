@@ -1,14 +1,15 @@
 import axios from 'axios';
-import { setJwtToken } from '../utils/storage';
 
-export const signUp = ()=>{
-
+export const signUp = (userDetails)=>{
+    return axios.post('/api/user/create', {
+       ...userDetails,
+      })
 }
 
 export const login = ({ email, password })=>{
     return axios.post('/api/login/', {
         email,
-        password
+        password,
       })
  
 }
