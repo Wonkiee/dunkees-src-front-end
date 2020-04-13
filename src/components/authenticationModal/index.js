@@ -11,7 +11,7 @@ const AuthenticationModal = () => {
      const [ isSignUpForm, setIsSignUpForm ]= useState(false);
 
      const toggle = () => setModal(!modal);
-  
+     
     return (
         <Modal isOpen={ modal } toggle={ toggle } className="authenticationModal" centered>
             <ModalHeader toggle={ toggle }>
@@ -43,7 +43,13 @@ const AuthenticationModal = () => {
                         </Button>
                     </div> 
                 </>}
-                {isLoginForm && <LoginForm/>}
+                {isLoginForm && 
+                <LoginForm 
+                    closeModal={ ()=>setModal(false) } 
+                    setError={ (error) => {
+                        setError(error);
+                        console.log(error)} }/>
+                }
                 {isSignUpForm && <SignUpForm/>}
             </ModalBody>
         </Modal>

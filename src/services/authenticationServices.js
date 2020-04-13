@@ -1,18 +1,14 @@
 import axios from 'axios';
+import { setJwtToken } from '../utils/storage';
 
 export const signUp = ()=>{
 
 }
 
 export const login = ({ email, password })=>{
-    axios.post('/api/login/', {
+    return axios.post('/api/login/', {
         email,
         password
       })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+ 
 }
