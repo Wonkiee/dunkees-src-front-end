@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import AuthenticationModal from './components/authenticationModal';
 
 function App() {
   return (
@@ -8,6 +8,7 @@ function App() {
           <header className="App-header">
               Dunkees
           </header>
+          <AuthenticationModal></AuthenticationModal>
       </div>
   );
 }
