@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Button, Form, FormGroup, Input,FormFeedback, Alert } from 'reactstrap';
-import constants from '../../utils/constants';
 import { signUp } from '../../services/authenticationServices';
 import messages from '../../utils/messages';
 
-const { phoneRegExp } =constants;
-console.log(phoneRegExp)
+const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
 const validationSchema= Yup.object({
   firstName: Yup.string()
     .max(15, 'Must be 15 characters or less')
