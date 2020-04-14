@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Button, Form, FormGroup, Input,FormFeedback } from 'reactstrap';
-import constants from '../../utils/constants';
+import { Button, Form, FormGroup, Input,FormFeedback, Alert } from 'reactstrap';
 import { signUp } from '../../services/authenticationServices';
+import messages from '../../utils/messages';
 
-const { phoneRegExp } =constants;
+const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
 const validationSchema= Yup.object({
   firstName: Yup.string()
     .max(15, 'Must be 15 characters or less')
@@ -27,7 +28,9 @@ const validationSchema= Yup.object({
   }).required('This field is required'),
 });
 
-const SignUpForm = () => {
+const SignUpForm = ({ closeModal }) => {
+  const [ hasError , setHasError ]= useState(false);
+
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -39,7 +42,17 @@ const SignUpForm = () => {
     },
     validationSchema,
     onSubmit: values => {
-      signUp({ values });
+      signUp({ values })
+      .then(function (response) {
+        if(response){
+          //TODO redirect to login
+            closeModal();
+        }
+      })
+      .catch(function (error) {
+        setHasError(true);
+        return error;
+      });
     },
   });
 
@@ -116,7 +129,13 @@ const SignUpForm = () => {
               <FormFeedback>{formik.errors.confirmPassword}</FormFeedback>
           </FormGroup>
 
-          <Button type="submit" >Submit</Button>
+          <Button type="submit" >{messages.buttonText.submit}</Button>
+
+          {hasError && 
+          <Alert color="danger" className="margin-top">
+              {messages.loginForm.errorMessage}
+          </Alert>
+          }
       </Form>
     
   );

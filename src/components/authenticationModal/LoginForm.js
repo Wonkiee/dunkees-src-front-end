@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Button, Form, FormGroup, Input,FormFeedback } from 'reactstrap';
+import { Button, Form, FormGroup, Input,FormFeedback, Alert } from 'reactstrap';
 import { login } from '../../services/authenticationServices';
+import { setJwtToken } from '../../utils/storage';
+import messages from '../../utils/messages';
 
 const validationSchema= Yup.object({
   email: Yup.string()
@@ -11,7 +13,9 @@ const validationSchema= Yup.object({
   password: Yup.string().required('This field is required'),
 });
 
-const LoginForm = () => {
+const LoginForm = ({ closeModal }) => {
+  const [ hasError , setHasError ]= useState(false);
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -19,7 +23,17 @@ const LoginForm = () => {
     },
     validationSchema,
     onSubmit: values => {
-        login({ values });
+        login({ ...values })
+        .then(function (response) {
+          if(response && response.token){
+              setJwtToken(token)
+              closeModal();
+          }
+        })
+        .catch(function (error) {
+          setHasError(true);
+          return error;
+        });
     },
   });
 
@@ -49,7 +63,13 @@ const LoginForm = () => {
               <FormFeedback>{formik.errors.password}</FormFeedback>
           </FormGroup>
 
-          <Button type="submit" >Submit</Button>
+          <Button type="submit" >{messages.buttonText.submit}</Button>
+
+          {hasError && 
+          <Alert color="danger" className="margin-top">
+              {messages.loginForm.errorMessage}
+          </Alert>
+          }
       </Form>
     
   );
