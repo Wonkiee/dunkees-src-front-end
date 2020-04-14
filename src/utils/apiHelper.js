@@ -6,19 +6,19 @@ const { REQUEST_TYPES, RESPONSE_STATUS }=constants;
 const serviceUrl='localhost:8080';
 
 const performRequest=(method, path, data)=>{
-    const token=getJwtToken();
-    const headers = {
-        accept: 'application/json',
-        'content-type': 'application/json',
-        Authorization: `Bearer ${ token }`,
+  const token=getJwtToken();
+  const headers = {
+    accept: 'application/json',
+    'content-type': 'application/json',
+    Authorization: `Bearer ${ token }`,
       };
-    const url=serviceUrl+path;
-      return axios({
-        method,
-        headers,
-        url,
-        data,
-      });
+  const url=serviceUrl+path;
+  return axios({
+    method,
+    headers,
+    url,
+    data,
+  });
 }
 
 /**
