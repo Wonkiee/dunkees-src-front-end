@@ -1,7 +1,8 @@
+import apiHelper from '../utils/apiHelper';
 import axios from 'axios';
 
 export const signUp = (userDetails)=>{
-    return axios.post('/api/user/create', {
+    return apiHelper.post('/api/user/create', {
        ...userDetails,
       })
 }
