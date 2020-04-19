@@ -13,7 +13,7 @@ const validationSchema= Yup.object({
   password: Yup.string().required('This field is required'),
 });
 
-const LoginForm = ({ closeModal, setIsResetPasswordForm }) => {
+const ResetPasswordForm = ({ closeModal }) => {
   const [ hasError , setHasError ]= useState(false);
 
   const formik = useFormik({
@@ -52,22 +52,7 @@ const LoginForm = ({ closeModal, setIsResetPasswordForm }) => {
                 invalid={ formik.touched.email && !!formik.errors.email } />
               <FormFeedback>{formik.errors.email}</FormFeedback>
           </FormGroup>
-
-          <FormGroup>
-              <Input 
-                type="password" 
-                name="password" 
-                id="password" 
-                placeholder="Password" 
-                value={ formik.values.password }
-                onChange={ formik.handleChange }
-                invalid={ formik.touched.password && !!formik.errors.password } />
-              <FormFeedback>{formik.errors.password}</FormFeedback>
-          </FormGroup>
-          <div className="footer-buttons">
-              <Button type="submit" >{messages.buttonText.submit}</Button>
-              <Button color="link" onClick={ ()=>setIsResetPasswordForm() }>Forgot password?</Button>
-          </div>
+          <Button type="submit" >{messages.buttonText.submit}</Button>
 
           {hasError && 
           <Alert color="danger" className="margin-top">
@@ -79,4 +64,4 @@ const LoginForm = ({ closeModal, setIsResetPasswordForm }) => {
   );
 };
 
-export default LoginForm;
+export default ResetPasswordForm;
