@@ -11,7 +11,7 @@ const LoginModal = ({ isLoginModalVisible, showResetPasswordModal }) => {
            <ModalBody>
                <LoginForm 
                     closeModal={ ()=>setModal(false) } 
-                    showResetPasswordModal={ ()=>showResetPasswordModal() }/>
+                    showResetPasswordModal={ showResetPasswordModal }/>
            </ModalBody>
        </Modal>
       );

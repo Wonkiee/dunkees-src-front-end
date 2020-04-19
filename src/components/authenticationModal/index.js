@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ButtonGroup } from 'reactstrap';
 import SignUpForm from './SignUpForm';
-import ResetPasswordForm from './ResetPasswordForm';
 import { ReactComponent as Logo } from '../../assets/Dunkees_logo.svg'
 import './authenticationModal.scss'
 import LoginModal from './loginModal';
+import ResetPasswordModal from './resetPasswordModal';
 
 const AuthenticationModal = () => {
      const [ modal, setModal ] = useState(true);
      const [ isLoginModalVisible, setIsLoginModalVisible ]= useState(false);
      const [ isSignUpForm, setIsSignUpForm ]= useState(false);
-     const [ isResetPasswordForm, setIsResetPasswordForm ]= useState(false);
+     const [ isResetPasswordModalVisible, setIsResetPasswordModalVisible ]= useState(false);
 
      const toggle = () => setModal(!modal);
 
@@ -43,13 +43,14 @@ const AuthenticationModal = () => {
                     <SignUpForm   
                 closeModal={ ()=>setModal(false) } />
                 }
-                    {isResetPasswordForm &&
-                    <ResetPasswordForm   
-                closeModal={ ()=>setModal(false) } />
-                }
                 </ModalBody>
             </Modal>
-            <LoginModal isLoginModalVisible={ isLoginModalVisible }/>
+            <ResetPasswordModal   
+                    isResetPasswordModalVisible={ isResetPasswordModalVisible }
+                closeModal={ ()=>setModal(false) } />
+            <LoginModal 
+            isLoginModalVisible={ isLoginModalVisible  && !isResetPasswordModalVisible }
+            showResetPasswordModal={ () => setIsResetPasswordModalVisible(true) } />
         </>
       );
   }

@@ -13,7 +13,7 @@ const validationSchema= Yup.object({
   password: Yup.string().required('This field is required'),
 });
 
-const LoginForm = ({ closeModal, setIsResetPasswordForm }) => {
+const LoginForm = ({ closeModal, showResetPasswordModal }) => {
   const [ hasError , setHasError ]= useState(false);
 
   const formik = useFormik({
@@ -66,7 +66,7 @@ const LoginForm = ({ closeModal, setIsResetPasswordForm }) => {
           </FormGroup>
           <div className="footer-buttons">
               <Button type="submit" >{messages.buttonText.submit}</Button>
-              <Button color="link" onClick={ ()=>setIsResetPasswordForm() }>Forgot password?</Button>
+              <Button color="link" onClick={ ()=>showResetPasswordModal() }>Forgot password?</Button>
           </div>
 
           {hasError && 
