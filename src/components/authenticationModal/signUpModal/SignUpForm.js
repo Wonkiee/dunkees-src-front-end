@@ -2,8 +2,8 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Button, Form, FormGroup, Input,FormFeedback } from 'reactstrap';
-import constants from '../../utils/constants';
-import { signUp } from '../../services/authenticationServices';
+import constants from '../../../utils/constants';
+import { signUp } from '../../../services/authenticationServices';
 
 const { phoneRegExp } =constants;
 const validationSchema= Yup.object({
