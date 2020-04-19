@@ -3,7 +3,9 @@ import constants from './constants';
 import { getJwtToken } from './storage';
 
 const { REQUEST_TYPES, RESPONSE_STATUS }=constants;
-const serviceUrl='localhost:8080';
+
+//TODO::GET URL FROM .ENV
+export const SERVICE_URL='http://34.66.251.184:3201';
 
 const performRequest=(method, path, data)=>{
   const token=getJwtToken();

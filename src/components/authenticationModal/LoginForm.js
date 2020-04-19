@@ -25,6 +25,7 @@ const LoginForm = ({ closeModal }) => {
     onSubmit: values => {
         login({ ...values })
         .then(function (response) {
+          console.log(response)
           if(response && response.token){
               setJwtToken(token)
               closeModal();
@@ -32,6 +33,7 @@ const LoginForm = ({ closeModal }) => {
         })
         .catch(function (error) {
           setHasError(true);
+          console.log(error)
           return error;
         });
     },
@@ -62,8 +64,10 @@ const LoginForm = ({ closeModal }) => {
                 invalid={ formik.touched.password && !!formik.errors.password } />
               <FormFeedback>{formik.errors.password}</FormFeedback>
           </FormGroup>
-
-          <Button type="submit" >{messages.buttonText.submit}</Button>
+          <div className="footer-buttons">
+              <Button type="submit" >{messages.buttonText.submit}</Button>
+              <Button color="link">Forgot password?</Button>
+          </div>
 
           {hasError && 
           <Alert color="danger" className="margin-top">
