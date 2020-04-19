@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Button, Form, FormGroup, Input,FormFeedback, Alert } from 'reactstrap';
-import { login } from '../../services/authenticationServices';
-import { setJwtToken } from '../../utils/storage';
-import messages from '../../utils/messages';
+import { login } from '../../../services/authenticationServices';
+import { setJwtToken } from '../../../utils/storage';
+import messages from '../../../utils/messages';
 
 const validationSchema= Yup.object({
   email: Yup.string()

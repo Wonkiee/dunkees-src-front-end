@@ -1,29 +1,23 @@
 import React, { useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter,ButtonGroup } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ButtonGroup } from 'reactstrap';
 import SignUpForm from './SignUpForm';
-import LoginForm from './LoginForm';
 import ResetPasswordForm from './ResetPasswordForm';
 import { ReactComponent as Logo } from '../../assets/Dunkees_logo.svg'
 import './authenticationModal.scss'
+import LoginModal from './loginModal';
 
 const AuthenticationModal = () => {
      const [ modal, setModal ] = useState(true);
-     const [ isLoginForm, setIsLoginForm ]= useState(false);
+     const [ isLoginModalVisible, setIsLoginModalVisible ]= useState(false);
      const [ isSignUpForm, setIsSignUpForm ]= useState(false);
      const [ isResetPasswordForm, setIsResetPasswordForm ]= useState(false);
 
      const toggle = () => setModal(!modal);
 
     return (
-        <Modal isOpen={ modal } toggle={ toggle } className="authenticationModal" centered>
-            <ModalHeader toggle={ toggle }>
-                {isLoginForm && !isResetPasswordForm && 'Login'}
-                {isSignUpForm && 'Sign Up'}
-                {isResetPasswordForm && 'Reset Password'}
-            </ModalHeader>
-            <ModalBody>
-                { !isLoginForm && !isSignUpForm && 
-                <>
+        <>
+            <Modal isOpen={ modal && !isLoginModalVisible } toggle={ toggle } className="authenticationModal" centered>
+                <ModalBody>
                     <Logo/>
                     <div class="vertical-buttons">
                         <ButtonGroup vertical>
@@ -41,27 +35,22 @@ const AuthenticationModal = () => {
                         outline 
                         color="primary" 
                         className="loginButton"
-                        onClick={ ()=>setIsLoginForm(true) }>
+                        onClick={ ()=>setIsLoginModalVisible(true) }>
                             Login
                         </Button>
                     </div> 
-                </>}
-                {isLoginForm && 
-                !isResetPasswordForm &&
-                <LoginForm 
-                    closeModal={ ()=>setModal(false) } 
-                    setIsResetPasswordForm={ ()=>setIsResetPasswordForm(true) }/>
-                }
-                {isSignUpForm && 
-                <SignUpForm   
+                    {isSignUpForm && 
+                    <SignUpForm   
                 closeModal={ ()=>setModal(false) } />
                 }
-                {isResetPasswordForm &&
-                <ResetPasswordForm   
+                    {isResetPasswordForm &&
+                    <ResetPasswordForm   
                 closeModal={ ()=>setModal(false) } />
                 }
-            </ModalBody>
-        </Modal>
+                </ModalBody>
+            </Modal>
+            <LoginModal isLoginModalVisible={ isLoginModalVisible }/>
+        </>
       );
   }
   
