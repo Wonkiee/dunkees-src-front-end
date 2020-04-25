@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import AuthenticationModal from './components/authenticationModal';
-import ShoppingForm from './components/shoppingForm';
+import ShoppingFlow from './components/shoppingFlow';
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
           {/*    Dunkees*/}
           {/*</header>*/}
           <AuthenticationModal></AuthenticationModal>
-          <ShoppingForm></ShoppingForm>
+          <ShoppingFlow></ShoppingFlow>
       </div>
   );
 }
