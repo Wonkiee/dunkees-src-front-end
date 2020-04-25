@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Button, Form, FormGroup, Input,FormFeedback, Alert } from 'reactstrap';
-import { signUp } from '../../services/authenticationServices';
-import messages from '../../utils/messages';
+import { Button, Form, FormGroup, Input,FormFeedback } from 'reactstrap';
+import constants from '../../../utils/constants';
+import { signUp } from '../../../services/authenticationServices';
 
-const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
-
+const { phoneRegExp } =constants;
 const validationSchema= Yup.object({
   firstName: Yup.string()
     .max(15, 'Must be 15 characters or less')
@@ -17,7 +16,7 @@ const validationSchema= Yup.object({
   email: Yup.string()
     .email('Invalid email address')
     .required('This field is required'),
-  mobileNumber:Yup.string().matches(phoneRegExp, 'Phone number is not valid').required('This field is required'),
+  phoneNumber:Yup.string().required('This field is required'),
   password: Yup.string().required('This field is required'),
   confirmPassword:Yup.string().when('password', {
     is: val => (val && val.length > 0 ? true : false),
@@ -28,31 +27,19 @@ const validationSchema= Yup.object({
   }).required('This field is required'),
 });
 
-const SignUpForm = ({ closeModal }) => {
-  const [ hasError , setHasError ]= useState(false);
-
+const SignUpForm = () => {
   const formik = useFormik({
     initialValues: {
       firstName: '',
       lastName: '',
       email: '',
-      mobileNumber:'',
+      phoneNumber:'',
       password:'',
       confirmPassword:'',
     },
     validationSchema,
     onSubmit: values => {
-      signUp({ values })
-      .then(function (response) {
-        if(response){
-          //TODO redirect to login
-            closeModal();
-        }
-      })
-      .catch(function (error) {
-        setHasError(true);
-        return error;
-      });
+      signUp({ values });
     },
   });
 
@@ -96,13 +83,13 @@ const SignUpForm = ({ closeModal }) => {
           <FormGroup>
               <Input 
                 type="text" 
-                name="mobileNumber" 
-                id="mobileNumber" 
-                placeholder="mobileNumber" 
-                value={ formik.values.mobileNumber }
+                name="phoneNumber" 
+                id="phoneNumber" 
+                placeholder="phoneNumber" 
+                value={ formik.values.phoneNumber }
                 onChange={ formik.handleChange }
-                invalid={ formik.touched.mobileNumber && !!formik.errors.mobileNumber } />
-              <FormFeedback>{formik.errors.mobileNumber}</FormFeedback>
+                invalid={ formik.touched.phoneNumber && !!formik.errors.phoneNumber } />
+              <FormFeedback>{formik.errors.phoneNumber}</FormFeedback>
           </FormGroup>
 
           <FormGroup>
@@ -129,13 +116,7 @@ const SignUpForm = ({ closeModal }) => {
               <FormFeedback>{formik.errors.confirmPassword}</FormFeedback>
           </FormGroup>
 
-          <Button type="submit" >{messages.buttonText.submit}</Button>
-
-          {hasError && 
-          <Alert color="danger" className="margin-top">
-              {messages.loginForm.errorMessage}
-          </Alert>
-          }
+          <Button type="submit" >Submit</Button>
       </Form>
     
   );

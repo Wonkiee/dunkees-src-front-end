@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Button, Form, FormGroup, Input,FormFeedback, Alert } from 'reactstrap';
-import { login } from '../../services/authenticationServices';
-import { setJwtToken } from '../../utils/storage';
-import messages from '../../utils/messages';
+import { login } from '../../../services/authenticationServices';
+import { setJwtToken } from '../../../utils/storage';
+import messages from '../../../utils/messages';
 
 const validationSchema= Yup.object({
   email: Yup.string()
@@ -13,7 +13,7 @@ const validationSchema= Yup.object({
   password: Yup.string().required('This field is required'),
 });
 
-const LoginForm = ({ closeModal }) => {
+const ResetPasswordForm = ({ closeModal }) => {
   const [ hasError , setHasError ]= useState(false);
 
   const formik = useFormik({
@@ -25,6 +25,7 @@ const LoginForm = ({ closeModal }) => {
     onSubmit: values => {
         login({ ...values })
         .then(function (response) {
+          console.log(response)
           if(response && response.token){
               setJwtToken(token)
               closeModal();
@@ -32,6 +33,7 @@ const LoginForm = ({ closeModal }) => {
         })
         .catch(function (error) {
           setHasError(true);
+          console.log(error)
           return error;
         });
     },
@@ -50,19 +52,6 @@ const LoginForm = ({ closeModal }) => {
                 invalid={ formik.touched.email && !!formik.errors.email } />
               <FormFeedback>{formik.errors.email}</FormFeedback>
           </FormGroup>
-
-          <FormGroup>
-              <Input 
-                type="password" 
-                name="password" 
-                id="password" 
-                placeholder="Password" 
-                value={ formik.values.password }
-                onChange={ formik.handleChange }
-                invalid={ formik.touched.password && !!formik.errors.password } />
-              <FormFeedback>{formik.errors.password}</FormFeedback>
-          </FormGroup>
-
           <Button type="submit" >{messages.buttonText.submit}</Button>
 
           {hasError && 
@@ -75,4 +64,4 @@ const LoginForm = ({ closeModal }) => {
   );
 };
 
-export default LoginForm;
+export default ResetPasswordForm;
