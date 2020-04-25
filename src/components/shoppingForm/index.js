@@ -1,11 +1,11 @@
 import React from 'react';
+import './shoppingForm.scss';
 import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import PropTypes from 'prop-types';
 
 const ShoppingForm = (props) => {
 
     return (
-        <div className="App-margin">
+        <div className="Shopping-Form-margin">
             <Form>
                 <FormGroup row>
                     <Label align="left" for="exampleEmail" sm={ 2 }>Email</Label>
