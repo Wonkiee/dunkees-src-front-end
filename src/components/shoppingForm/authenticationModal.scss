@@ -1,0 +1,26 @@
+.authenticationModal {
+ svg {
+   margin-left: 25%;
+   margin-top:10%;
+   margin-bottom:10%;
+ }
+
+.vertical-buttons{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-left: 25%;
+    .loginButton{
+        margin-top: 10px;
+    }
+}
+
+.margin-top{
+  margin-top: 20px;
+}
+}
+
+.footer-buttons{
+  display: flex;
+  justify-content: space-between;
+}
