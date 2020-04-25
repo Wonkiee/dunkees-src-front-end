@@ -53,5 +53,5 @@ const AuthenticationModal = () => {
         </>
       );
   }
-  
+
   export default AuthenticationModal;
