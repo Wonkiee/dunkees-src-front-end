@@ -19,4 +19,8 @@ export default {
         INTERNAL_SERVER_ERROR: 500,
         UNREACHABLE: 503,
       },
+    ARROW_DIRECTIONS: {
+      DOWN: 'down',
+      RIGHT: 'right'
+    }
 };
