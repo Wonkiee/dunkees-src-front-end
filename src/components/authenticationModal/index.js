@@ -1,23 +1,47 @@
 import React, { useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ButtonGroup } from 'reactstrap';
-import SignUpForm from './signUpModal/SignUpForm';
+import { Button, Modal, ModalBody, ButtonGroup } from 'reactstrap';
 import { ReactComponent as Logo } from '../../assets/Dunkees_logo.svg'
 import './authenticationModal.scss'
 import LoginModal from './loginModal';
 import ResetPasswordModal from './resetPasswordModal';
 import SignUpModal from './signUpModal';
+import { loginAsGuest } from '../../services/authenticationServices';
+import { Redirect } from 'react-router-dom';
 
 const AuthenticationModal = () => {
      const [ modal, setModal ] = useState(true);
      const [ isLoginModalVisible, setIsLoginModalVisible ]= useState(false);
      const [ isSignUpModalVisible, setIsSignUpModalVisible ]= useState(false);
      const [ isResetPasswordModalVisible, setIsResetPasswordModalVisible ]= useState(false);
-
+     const [ isGuest,setIsGuest ]=useState(false);
      const toggle = () => setModal(!modal);
+
+     const openLoginModal=()=>{
+         setIsSignUpModalVisible(false);
+         setIsResetPasswordModalVisible(false);
+         setIsLoginModalVisible(true);
+     }
+
+    const openResetModal=()=>{
+        setModal(false);    
+        setIsLoginModalVisible(false);
+        setIsResetPasswordModalVisible(true);
+    }
+
+    const onClickLoginAsGuest=()=>{
+        loginAsGuest()
+        .then(()=>{
+            setIsGuest(true);
+        })
+        .catch((err)=>{
+        console.error(err);
+        });
+    }
 
     return (
         <>
-            <Modal isOpen={ modal && !isLoginModalVisible } toggle={ toggle } className="authenticationModal" centered>
+            {isGuest && <Redirect to='/home'/> }
+            <Modal isOpen={ modal } toggle={ toggle } className="authenticationModal" centered>
                 <ModalBody>
                     <Logo/>
                     <div class="vertical-buttons">
@@ -28,7 +52,7 @@ const AuthenticationModal = () => {
                         onClick={ ()=>setIsSignUpModalVisible(true) }>
                                 Sign Up
                             </Button>
-                            <Button outline color="secondary">
+                            <Button outline color="secondary" onClick={ onClickLoginAsGuest }>
                                 Continue as Guest
                             </Button>
                         </ButtonGroup>
@@ -44,12 +68,15 @@ const AuthenticationModal = () => {
             </Modal>
             <ResetPasswordModal   
               isResetPasswordModalVisible={ isResetPasswordModalVisible }
-              closeModal={ ()=>setModal(false) } />
+              openLoginModal={ openLoginModal }
+               />
             <LoginModal 
-              isLoginModalVisible={ isLoginModalVisible  && !isResetPasswordModalVisible }
-              showResetPasswordModal={ () => setIsResetPasswordModalVisible(true) } />
+              isLoginModalVisible={ isLoginModalVisible }
+              showResetPasswordModal={ () => setIsResetPasswordModalVisible(true) } 
+              openResetModal={ openResetModal }/>
             <SignUpModal 
-              isSignUpModalVisible={ isSignUpModalVisible } />
+              isSignUpModalVisible={ isSignUpModalVisible }
+              openLoginModal={ openLoginModal } />
         </>
       );
   }
