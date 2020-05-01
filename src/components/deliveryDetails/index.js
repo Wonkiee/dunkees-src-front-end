@@ -37,8 +37,8 @@ const DeliveryDetails = () => {
         <div className="Form-margin">
             <Form onSubmit={ formik.handleSubmit }>
                 <FormGroup row>
-                    <Label sm={ { size: 2, offset: 3 } } align="left" for="exampleEmail">Name</Label>
-                    <Col  sm={ { size: 4, offset: 0 } }>
+                    <Label sm={ { size: 2, offset: 1 } } align="left" for="exampleEmail">Name</Label>
+                    <Col  sm={ { size: 8, offset: 0 } }>
                         <Input 
                         type="text" 
                         name="name" 
