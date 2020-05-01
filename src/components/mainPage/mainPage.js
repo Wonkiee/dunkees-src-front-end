@@ -13,6 +13,6 @@ export default class MainPage extends React.Component {
             <div id="mainPageSec">
                 <Layout/>
             </div>
-        );
+    );
     }
 }
