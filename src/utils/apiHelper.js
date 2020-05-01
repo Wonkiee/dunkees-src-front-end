@@ -14,7 +14,7 @@ const performRequest=(method, path, data)=>{
     'content-type': 'application/json',
     Authorization: `Bearer ${ token }`,
       };
-  const url=serviceUrl+path;
+  const url = SERVICE_URL + path;
   return axios({
     method,
     headers,
