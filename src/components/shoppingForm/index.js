@@ -3,11 +3,11 @@ import './shoppingForm.scss';
 import { Col, Button, Form, FormGroup, Input } from 'reactstrap';
 
 const ShoppingForm = (props) => {
-    const [ showShippingForm ] = React.useState(true);
-    const [ showBackButton ] = React.useState(false);
+    const [ showShippingForm ] = useState(true);
+    const [ showBackButton ] = useState(false);
 
     const onClickAddItem = () => {
-        console.log("add item");
+        console.log('add item');
     };
 
     const onClickBackButton = () => {
@@ -25,7 +25,6 @@ const ShoppingForm = (props) => {
                     </Col>
                 </FormGroup>
                 <FormGroup row>
-                    {/*<Label sm={ { size: 2, offset: 2 } }  align="left" for="exampleEmail"></Label>*/}
                     <Col  sm={ { size: 6, offset: 3 } }>
                         <Input type="text" placeholder="Item #2" />
                     </Col>
