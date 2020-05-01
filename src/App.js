@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import AuthenticationModal from './components/authenticationModal';
 import ShoppingFlow from './components/shoppingFlow';
+import DeliveryDetails from './components/deliveryDetails';
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
           {/*<header className="App-header">*/}
           {/*    Dunkees*/}
           {/*</header>*/}
-          <AuthenticationModal></AuthenticationModal>
+          {/*<AuthenticationModal></AuthenticationModal>*/}
+          <DeliveryDetails></DeliveryDetails>
           <ShoppingFlow></ShoppingFlow>
       </div>
   );

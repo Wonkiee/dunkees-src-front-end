@@ -34,14 +34,7 @@ export default class ExpandCollapseSection extends React.Component {
                     </span>
                 </div>
                 <Collapse isOpen={ this.state.isOpen }>
-                    <Card>
-                        <CardBody>
-                            Awula => Fuck U <br/>
-                            Gappiya => Fuck U <br/>
-                            Upasaka => Fuck U <br/>
-                            Billa => Fuck u
-                        </CardBody>
-                    </Card>
+                    {this.props.children    }
                 </Collapse>
             </div>
         );

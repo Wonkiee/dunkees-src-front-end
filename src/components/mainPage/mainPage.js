@@ -1,7 +1,6 @@
 import React from 'react';
 import '../mainPage/mainPage.scss';
 import Layout from '../layout/layout';
-import constants from '.././../utils/constants';
 
 export default class MainPage extends React.Component {
 
