@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState }from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Button, Form, FormGroup, Input,FormFeedback } from 'reactstrap';
+import { Button, Form, FormGroup, Input,FormFeedback, Alert } from 'reactstrap';
 import constants from '../../../utils/constants';
 import { signUp } from '../../../services/authenticationServices';
+import messages from '../../../utils/messages';
 
 const { phoneRegExp } =constants;
 const validationSchema= Yup.object({
@@ -27,7 +28,9 @@ const validationSchema= Yup.object({
   }).required('This field is required'),
 });
 
-const SignUpForm = () => {
+const SignUpForm = ({ openLoginModal }) => {
+  const [ hasError , setHasError ]= useState(false);
+
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -39,7 +42,14 @@ const SignUpForm = () => {
     },
     validationSchema,
     onSubmit: values => {
-      signUp({ values });
+      signUp({ values })
+      .then(function () {
+        openLoginModal();
+      })
+      .catch(function (error) {
+        setHasError(true);
+        return error;
+      });
     },
   });
 
@@ -117,6 +127,11 @@ const SignUpForm = () => {
           </FormGroup>
 
           <Button type="submit" >Submit</Button>
+          {hasError && 
+              <Alert color="danger" className="margin-top">
+                  {messages.loginForm.errorMessage}
+              </Alert>
+          }
       </Form>
     
   );

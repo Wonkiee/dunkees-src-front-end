@@ -15,6 +15,11 @@ const AuthenticationModal = () => {
 
      const toggle = () => setModal(!modal);
 
+     const openLoginModal=()=>{
+         setIsSignUpModalVisible(false);
+         setIsLoginModalVisible(true);
+     }
+
     return (
         <>
             <Modal isOpen={ modal && !isLoginModalVisible } toggle={ toggle } className="authenticationModal" centered>
@@ -49,7 +54,8 @@ const AuthenticationModal = () => {
               isLoginModalVisible={ isLoginModalVisible  && !isResetPasswordModalVisible }
               showResetPasswordModal={ () => setIsResetPasswordModalVisible(true) } />
             <SignUpModal 
-              isSignUpModalVisible={ isSignUpModalVisible } />
+              isSignUpModalVisible={ isSignUpModalVisible }
+              openLoginModal={ openLoginModal } />
         </>
       );
   }
