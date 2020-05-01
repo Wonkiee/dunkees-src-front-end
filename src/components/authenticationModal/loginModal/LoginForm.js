@@ -14,7 +14,7 @@ const validationSchema= Yup.object({
   password: Yup.string().required('This field is required'),
 });
 
-const LoginForm = () => {
+const LoginForm = ({ openResetModal }) => {
   const [ hasError , setHasError ]= useState(false);
   const [ isAuthenticated, setIsAuthenticated ]= useState(false); 
 
@@ -69,7 +69,7 @@ const LoginForm = () => {
               </FormGroup>
               <div className="footer-buttons">
                   <Button type="submit" >{messages.buttonText.submit}</Button>
-                  <Button color="link" onClick={ ()=>showResetPasswordModal() }>Forgot password?</Button>
+                  <Button color="link" onClick={ ()=>openResetModal() }>Forgot password?</Button>
               </div>
 
               {hasError && 

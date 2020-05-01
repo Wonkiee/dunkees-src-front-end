@@ -132,8 +132,7 @@ const SignUpForm = ({ openLoginModal }) => {
                   {messages.loginForm.errorMessage}
               </Alert>
           }
-      </Form>
-    
+      </Form>   
   );
 };
 
