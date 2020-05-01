@@ -1,18 +1,11 @@
 import React from 'react';
 import './App.css';
-import AuthenticationModal from './components/authenticationModal';
-import ShoppingFlow from './components/shoppingFlow';
-import DeliveryDetails from './components/deliveryDetails';
+import MainPage from './components/mainPage/mainPage';
 
 function App() {
   return (
       <div className="App">
-          {/*<header className="App-header">*/}
-          {/*    Dunkees*/}
-          {/*</header>*/}
-          {/*<AuthenticationModal></AuthenticationModal>*/}
-          <DeliveryDetails></DeliveryDetails>
-          <ShoppingFlow></ShoppingFlow>
+          <MainPage></MainPage>
       </div>
   );
 }

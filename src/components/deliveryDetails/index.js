@@ -11,7 +11,7 @@ const DeliveryDetails = (props) => {
 
     const DeliveryDetailsForm = () => (
         <div className="Form-margin">
-            <h2 className="Shopping-Form-header">Delivery Details</h2>
+            {/*<h2 className="Shopping-Form-header">Delivery Details</h2>*/}
             <Form>
                 <FormGroup row>
                     <Label sm={ { size: 2, offset: 3 } } align="left" for="exampleEmail">Name</Label>

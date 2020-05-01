@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import '../layout/layout.scss'
 import SubSection from '../expandCollapseSection/expandCollapseSection';
-import ShoppingForm from "../shoppingFlow";
+import ShoppingForm from "../shoppingForm";
 import DeliveryDetails from "../deliveryDetails";
 
 const Layout = (props) => {
@@ -17,7 +17,7 @@ const Layout = (props) => {
             </Row>
             <Row>
                 <Col>
-                    <h1> My Information </h1>
+                    {/*<h1> Place Your Order ! </h1>*/}
                 </Col>
             </Row>
             <Row>

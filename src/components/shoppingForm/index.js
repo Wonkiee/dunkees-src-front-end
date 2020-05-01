@@ -2,7 +2,7 @@ import React, { useState }  from 'react';
 import './shoppingForm.scss';
 import { Col, Button, Form, FormGroup, Input } from 'reactstrap';
 
-const ShoppingFlow = (props) => {
+const ShoppingForm = (props) => {
     const [ showShippingForm ] = React.useState(true);
     const [ showBackButton ] = React.useState(false);
 
@@ -14,9 +14,9 @@ const ShoppingFlow = (props) => {
 
     };
 
-    const ShoppingForm = () => (
+    const ShoppingFormDiv = () => (
         <div className="Form-margin">
-            <h2 className="Shopping-Form-header">Shopping List</h2>
+            {/*<h2 className="Shopping-Form-header">Shopping List</h2>*/}
             <Form>
                 <FormGroup row>
                     {/*<Label sm={ { size: 2, offset: 2 } }  align="left" for="exampleEmail"></Label>*/}
@@ -54,10 +54,10 @@ const ShoppingFlow = (props) => {
 
     return (
         <div>
-            { showShippingForm ? <ShoppingForm /> : null }
+            { showShippingForm ? <ShoppingFormDiv /> : null }
             { showBackButton ? <BackButton /> : null }
         </div>
     );
 };
 
-export default ShoppingFlow;
+export default ShoppingForm;

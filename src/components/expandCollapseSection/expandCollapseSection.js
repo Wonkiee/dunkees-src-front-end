@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Collapse, Button, CardBody, Card } from 'reactstrap';
 import '../expandCollapseSection/expandCollapseSection.scss';
-
-import constants from '.././../utils/constants';
+import constants from "../../utils/constants";
 
 export default class ExpandCollapseSection extends React.Component {
     constructor(props) {
