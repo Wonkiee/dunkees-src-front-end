@@ -79,6 +79,6 @@ const AuthenticationModal = () => {
               openLoginModal={ openLoginModal } />
         </>
       );
-  }
+  };
 
   export default AuthenticationModal;

@@ -4,7 +4,6 @@ import '../layout/layout.scss'
 import SubSection from '../expandCollapseSection/expandCollapseSection';
 import ShoppingForm from "../shoppingForm";
 import DeliveryDetails from "../deliveryDetails";
-import Progress from "reactstrap/es/Progress";
 
 const Layout = (props) => {
     return (
