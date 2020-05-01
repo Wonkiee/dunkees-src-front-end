@@ -5,13 +5,15 @@ import './authenticationModal.scss'
 import LoginModal from './loginModal';
 import ResetPasswordModal from './resetPasswordModal';
 import SignUpModal from './signUpModal';
+import { loginAsGuest } from '../../services/authenticationServices';
+import { Redirect } from 'react-router-dom';
 
 const AuthenticationModal = () => {
      const [ modal, setModal ] = useState(true);
      const [ isLoginModalVisible, setIsLoginModalVisible ]= useState(false);
      const [ isSignUpModalVisible, setIsSignUpModalVisible ]= useState(false);
      const [ isResetPasswordModalVisible, setIsResetPasswordModalVisible ]= useState(false);
-
+     const [ isGuest,setIsGuest ]=useState(false);
      const toggle = () => setModal(!modal);
 
      const openLoginModal=()=>{
@@ -26,8 +28,19 @@ const AuthenticationModal = () => {
         setIsResetPasswordModalVisible(true);
     }
 
+    const onClickLoginAsGuest=()=>{
+        loginAsGuest()
+        .then(()=>{
+            setIsGuest(true);
+        })
+        .catch((err)=>{
+        console.error(err);
+        });
+    }
+
     return (
         <>
+            {isGuest && <Redirect to='/home'/> }
             <Modal isOpen={ modal } toggle={ toggle } className="authenticationModal" centered>
                 <ModalBody>
                     <Logo/>
@@ -39,7 +52,7 @@ const AuthenticationModal = () => {
                         onClick={ ()=>setIsSignUpModalVisible(true) }>
                                 Sign Up
                             </Button>
-                            <Button outline color="secondary">
+                            <Button outline color="secondary" onClick={ onClickLoginAsGuest }>
                                 Continue as Guest
                             </Button>
                         </ButtonGroup>

@@ -14,6 +14,12 @@ export const login = ({ email, password })=>{
     })
 }
 
+export const loginAsGuest = () =>{
+    return axios.post(SERVICE_URL+'/api/login/guest-user', {
+       isGuest:true
+    });
+} 
+
 export const sendResetPasswordEmail=(email) =>{
     return axios.post(SERVICE_URL+'/api/user/password-reset-mail',{ email })
 }
