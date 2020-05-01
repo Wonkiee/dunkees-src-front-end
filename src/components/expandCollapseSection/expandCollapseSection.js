@@ -22,7 +22,7 @@ export default class ExpandCollapseSection extends React.Component {
         this.setState({
             isOpen: !this.state.isOpen
         });
-    }
+    };
 
     render() {
         return (
@@ -33,7 +33,7 @@ export default class ExpandCollapseSection extends React.Component {
                     </span>
                 </div>
                 <Collapse isOpen={ this.state.isOpen }>
-                    {this.props.children    }
+                    {this.props.children }
                 </Collapse>
             </div>
         );

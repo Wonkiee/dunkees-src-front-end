@@ -44,7 +44,7 @@ const AuthenticationModal = () => {
             <Modal isOpen={ modal } toggle={ toggle } className="authenticationModal" centered>
                 <ModalBody>
                     <Logo/>
-                    <div class="vertical-buttons">
+                    <div className="vertical-buttons">
                         <ButtonGroup vertical>
                             <Button 
                         outline 

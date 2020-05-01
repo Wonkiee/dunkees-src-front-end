@@ -1,6 +1,7 @@
 import React from 'react';
 import '../mainPage/mainPage.scss';
 import Layout from '../layout/layout';
+import Progress from "reactstrap/es/Progress";
 
 export default class MainPage extends React.Component {
 
@@ -10,9 +11,11 @@ export default class MainPage extends React.Component {
 
     render() {
         return (
-            <div id="mainPageSec">
-                <Layout/>
+            <div>
+                <div id="mainPageSec">
+                    <Layout/>
+                </div>
             </div>
-        );
+    );
     }
 }

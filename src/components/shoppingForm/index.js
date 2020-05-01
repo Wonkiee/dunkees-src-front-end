@@ -1,13 +1,16 @@
 import React, { useState }  from 'react';
 import './shoppingForm.scss';
 import { Col, Button, Form, FormGroup, Input } from 'reactstrap';
+import InputGroup from 'reactstrap/es/InputGroup';
+import InputGroupAddon from 'reactstrap/es/InputGroupAddon';
+import InputGroupText from 'reactstrap/es/InputGroupText';
 
 const ShoppingForm = (props) => {
     const [ showShippingForm ] = React.useState(true);
     const [ showBackButton ] = React.useState(false);
 
     const onClickAddItem = () => {
-        console.log("add item");
+        console.log('add item');
     };
 
     const onClickBackButton = () => {
@@ -18,20 +21,44 @@ const ShoppingForm = (props) => {
         <div className="Form-margin">
             {/*<h2 className="Shopping-Form-header">Shopping List</h2>*/}
             <Form>
-                <FormGroup row>
-                    {/*<Label sm={ { size: 2, offset: 2 } }  align="left" for="exampleEmail"></Label>*/}
-                    <Col  sm={ { size: 6, offset: 3 } }>
-                        <Input type="text" placeholder="Item #1" />
-                    </Col>
-                </FormGroup>
-                <FormGroup row>
-                    {/*<Label sm={ { size: 2, offset: 2 } }  align="left" for="exampleEmail"></Label>*/}
-                    <Col  sm={ { size: 6, offset: 3 } }>
-                        <Input type="text" placeholder="Item #2" />
-                    </Col>
-                </FormGroup>
+                {/*<FormGroup row>*/}
+                {/*    /!*<Label sm={ { size: 2, offset: 2 } }  align="left" for="exampleEmail"></Label>*!/*/}
+                {/*    <Col  sm={ { size: 6, offset: 3 } }>*/}
+                {/*        <Input type="text" placeholder="Item #1" />*/}
+                {/*    </Col>*/}
+                {/*</FormGroup>*/}
+                <InputGroup>
+                    <Input placeholder="Item #1" />
+                    <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                            <Input addon type="checkbox" aria-label="Checkbox for following text input" />
+                        </InputGroupText>
+                    </InputGroupAddon>
+                </InputGroup><br/>
+                <InputGroup>
+                    <Input placeholder="Item #2" />
+                    <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                            <Input addon type="checkbox" aria-label="Checkbox for following text input" />
+                        </InputGroupText>
+                    </InputGroupAddon>
+                </InputGroup><br/>
+                <InputGroup>
+                    <Input placeholder="Item #3" />
+                    <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                            <Input addon type="checkbox" aria-label="Checkbox for following text input" />
+                        </InputGroupText>
+                    </InputGroupAddon>
+                </InputGroup><br/>
+                {/*<FormGroup row>*/}
+                {/*    /!*<Label sm={ { size: 2, offset: 2 } }  align="left" for="exampleEmail"></Label>*!/*/}
+                {/*    <Col  sm={ { size: 6, offset: 3 } }>*/}
+                {/*        <Input type="text" placeholder="Item #2" />*/}
+                {/*    </Col>*/}
+                {/*</FormGroup>*/}
                 <div check row className="Shopping-Form-add-more">
-                    <Col  sm={ { size: 2, offset: 5 } }>
+                    <Col sm={ { size: 4, offset: 4 } }>
                         <Button outline onClick={ onClickAddItem } color="primary" size="lg" block>Add Item</Button>
                     </Col>
                 </div>
