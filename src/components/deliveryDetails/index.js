@@ -1,4 +1,4 @@
-import React, { useState }  from 'react';
+import React from 'react';
 import './deliveryDetailsForm.scss';
 import { Col, Button, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
 import { useFormik } from 'formik';
@@ -16,8 +16,7 @@ const validationSchema= Yup.object({
     deliveryNotes: Yup.string(),
   });
 
-const DeliveryDetails = (props) => {
-    const [ showDeliveryDetailsForm ] = useState(true);
+const DeliveryDetails = () => {
 
     const formik = useFormik({
         initialValues: {
@@ -30,12 +29,11 @@ const DeliveryDetails = (props) => {
         },
         validationSchema,
         onSubmit: values => {
-            console.log(values)
             submitDeliveryDetails({ ...values });
         },
       });
 
-    const DeliveryDetailsForm = () => (
+    return (
         <div className="Form-margin">
             <Form onSubmit={ formik.handleSubmit }>
                 <FormGroup row>
@@ -63,6 +61,7 @@ const DeliveryDetails = (props) => {
                         value={ formik.values.contactNumber }
                         onChange={ formik.handleChange }
                         invalid={ formik.touched.contactNumber && !!formik.errors.contactNumber }  />
+                        <FormFeedback>{formik.errors.contactNumber}</FormFeedback>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
@@ -76,6 +75,7 @@ const DeliveryDetails = (props) => {
                         value={ formik.values.address }
                         onChange={ formik.handleChange }
                         invalid={ formik.touched.address && !!formik.errors.address }  />
+                        <FormFeedback>{formik.errors.address}</FormFeedback>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
@@ -89,6 +89,7 @@ const DeliveryDetails = (props) => {
                         value={ formik.values.district }
                         onChange={ formik.handleChange }
                         invalid={ formik.touched.district && !!formik.errors.district }  />
+                        <FormFeedback>{formik.errors.district}</FormFeedback>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
@@ -123,12 +124,6 @@ const DeliveryDetails = (props) => {
                     </Col>
                 </div>
             </Form>
-        </div>
-    );
-
-    return (
-        <div>
-            { showDeliveryDetailsForm ? <DeliveryDetailsForm /> : null }
         </div>
     );
 };
