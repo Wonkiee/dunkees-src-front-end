@@ -8,9 +8,10 @@ const ShoppingForm = () => {
     const [ items,setItems ]=useState([]);
     const [ itemName,setItemName ]=useState(null);
     const [ itemQty,setItemQty ]=useState(null);
+    const [ brand,setBrand ]=useState('any');
 
     const onClickAddItem = () => {
-        const item={ itemName,itemQty };
+        const item={ itemName,itemQty,brand };
         const updatedItems=[ ...items,item ];
         setItems(updatedItems)
     };
@@ -34,7 +35,7 @@ const ShoppingForm = () => {
                 </Row>
                 <FormGroup>
                     <Label for="brand">Select a brand</Label>
-                    <InputSelector name="brand"/>
+                    <Input id="brand" placeholder="Any(Default)" onChange={ (e)=>setBrand(e.target.value) }/>
                 </FormGroup>
                 <Button outline  onClick={ onClickAddItem } color="primary" size="lg" block>Add Item</Button>
             </Form>

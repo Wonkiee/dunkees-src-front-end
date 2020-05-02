@@ -1,36 +1,41 @@
 import React, { useState }  from 'react';
 import { Col, Button, Form, Input,  ListGroup, ListGroupItem, Label,Row, FormGroup } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 
-const ItemList=(props)=>{
+const ItemList=({ items })=>{
+    const onClickEdit=()=>{
+        console.log('edit')
+    }
     
-    const {
-        items,
-        setItemName,
-        setItemQty
-    }=props;
+    const onClickDelete=()=>{
+        console.log('delete')
+    }
 
 return(
     <>
         {items &&
         <ListGroup>
             <h1>Item List</h1>
+            <ListGroupItem>
+                <Row>
+                    <Col>Name</Col>
+                    <Col>Qty</Col>
+                    <Col>Brand</Col>
+                    <Col></Col>
+                </Row>
+            </ListGroupItem>
             {items.map((item)=>(
                 <ListGroupItem>
-                    <span>
-                        {item.itemName}
-                    </span>
-
-                    <FontAwesomeIcon icon={ faCoffee } />
-                    {/* <Input 
-                    placeholder="quantity" 
-                    value={ item.itemQty } 
-                    min={ 0 } 
-                    max={ 100 } 
-                    type="number" 
-                    step="1" 
-                    onChange={ (e)=>setItemQty(e.target.value) } /> */}
+                    <Row>
+                        <Col> {item.itemName}</Col>
+                        <Col> {item.itemQty}</Col>
+                        <Col> {item.brand}</Col>
+                        <Col>
+                            <FontAwesomeIcon icon={ faEdit  } onClick={ onClickEdit }/>
+                            <FontAwesomeIcon icon={ faTrash  } onClick={ onClickDelete }/>
+                        </Col>
+                    </Row>
                 </ListGroupItem>
     ))}
         </ListGroup>
