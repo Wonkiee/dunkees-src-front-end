@@ -2,6 +2,7 @@ import React, { useState }  from 'react';
 import './shoppingForm.scss';
 import { Col, Button, Form, Input,  ListGroup, ListGroupItem, Label,Row, FormGroup } from 'reactstrap';
 import InputSelector from '../InputSelector';
+import ItemList from'../ItemList';
 
 const ShoppingForm = () => {
     const [ items,setItems ]=useState([]);
@@ -42,19 +43,11 @@ const ShoppingForm = () => {
                     <Button color="primary" size="lg" block>Continue</Button>
                 </Col>
             </div>
-            <div>
-                {items && <ListGroup>
-                    <h1>Item List</h1>
-                        {items.map((item)=>(
-                            <ListGroupItem>
-                                <span>
-                                    {item.itemName}
-                                </span>
-                                <Input placeholder="quantity" value={ item.itemQty } min={ 0 } max={ 100 } type="number" step="1" onChange={ (e)=>setItemQty(e.target.value) } />
-                            </ListGroupItem>
-                ))}
-                    </ListGroup>}
-            </div>
+            <ItemList 
+            items={ items }
+            setItemName={ setItemName }
+            setItemQty={ setItemQty }
+            />
         </>
     );
 };
