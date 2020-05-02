@@ -1,89 +1,61 @@
 import React, { useState }  from 'react';
 import './shoppingForm.scss';
-import { Col, Button, Form, FormGroup, Input } from 'reactstrap';
-import InputGroup from 'reactstrap/es/InputGroup';
-import InputGroupAddon from 'reactstrap/es/InputGroupAddon';
-import InputGroupText from 'reactstrap/es/InputGroupText';
+import { Col, Button, Form, Input,  ListGroup, ListGroupItem, Label,Row, FormGroup } from 'reactstrap';
+import InputSelector from '../InputSelector';
 
-const ShoppingForm = (props) => {
-    const [ showShippingForm ] = React.useState(true);
-    const [ showBackButton ] = React.useState(false);
+const ShoppingForm = () => {
+    const [ items,setItems ]=useState([]);
+    const [ itemName,setItemName ]=useState(null);
+    const [ itemQty,setItemQty ]=useState(null);
 
     const onClickAddItem = () => {
-        console.log('add item');
+        const item={ itemName,itemQty };
+        const updatedItems=[ ...items,item ];
+        setItems(updatedItems)
     };
-
-    const onClickBackButton = () => {
-
-    };
-
-    const ShoppingFormDiv = () => (
-        <div className="Form-margin">
-            {/*<h2 className="Shopping-Form-header">Shopping List</h2>*/}
-            <Form>
-                {/*<FormGroup row>*/}
-                {/*    /!*<Label sm={ { size: 2, offset: 2 } }  align="left" for="exampleEmail"></Label>*!/*/}
-                {/*    <Col  sm={ { size: 6, offset: 3 } }>*/}
-                {/*        <Input type="text" placeholder="Item #1" />*/}
-                {/*    </Col>*/}
-                {/*</FormGroup>*/}
-                <InputGroup>
-                    <Input placeholder="Item #1" />
-                    <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                            <Input addon type="checkbox" aria-label="Checkbox for following text input" />
-                        </InputGroupText>
-                    </InputGroupAddon>
-                </InputGroup><br/>
-                <InputGroup>
-                    <Input placeholder="Item #2" />
-                    <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                            <Input addon type="checkbox" aria-label="Checkbox for following text input" />
-                        </InputGroupText>
-                    </InputGroupAddon>
-                </InputGroup><br/>
-                <InputGroup>
-                    <Input placeholder="Item #3" />
-                    <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                            <Input addon type="checkbox" aria-label="Checkbox for following text input" />
-                        </InputGroupText>
-                    </InputGroupAddon>
-                </InputGroup><br/>
-                {/*<FormGroup row>*/}
-                {/*    /!*<Label sm={ { size: 2, offset: 2 } }  align="left" for="exampleEmail"></Label>*!/*/}
-                {/*    <Col  sm={ { size: 6, offset: 3 } }>*/}
-                {/*        <Input type="text" placeholder="Item #2" />*/}
-                {/*    </Col>*/}
-                {/*</FormGroup>*/}
-                <div check row className="Shopping-Form-add-more">
-                    <Col sm={ { size: 4, offset: 4 } }>
-                        <Button outline onClick={ onClickAddItem } color="primary" size="lg" block>Add Item</Button>
-                    </Col>
-                </div>
-                <div check row className="Shopping-Form-continue">
-                    <Col  sm={ { size: 4, offset: 4 } }>
-                        <Button color="primary" size="lg" block>Continue</Button>
-                    </Col>
-                </div>
-            </Form>
-        </div>
-    );
-
-    const BackButton = () => (
-        <div check row className="Shopping-Form-back">
-            <Col  sm={ { size: 2, offset: 5 } }>
-                <Button outline onClick={ onClickBackButton } color="secondary" size="lg" block>Back</Button>
-            </Col>
-        </div>
-    );
 
     return (
-        <div>
-            { showShippingForm ? <ShoppingFormDiv /> : null }
-            { showBackButton ? <BackButton /> : null }
-        </div>
+        <>
+            <Form>
+                <Row form>
+                    <Col md={ 6 }>
+                        <FormGroup>
+                            <Label for="itemName">Item Name</Label>
+                            <Input id="itemName" placeholder="name" onChange={ (e)=>setItemName(e.target.value) }/>
+                        </FormGroup>
+                    </Col>
+                    <Col md={ 6 }>
+                        <FormGroup>
+                            <Label for="itemQty">Item quantity</Label>
+                            <Input id="itemQty" placeholder="quantity" min={ 0 } max={ 100 } type="number" step="1" onChange={ (e)=>setItemQty(e.target.value) } />
+                        </FormGroup>
+                    </Col>
+                </Row>
+                <FormGroup>
+                    <Label for="brand">Select a brand</Label>
+                    <InputSelector name="brand"/>
+                </FormGroup>
+                <Button outline  onClick={ onClickAddItem } color="primary" size="lg" block>Add Item</Button>
+            </Form>
+            <div check row className="Shopping-Form-continue">
+                <Col  sm={ { size: 4, offset: 4 } }>
+                    <Button color="primary" size="lg" block>Continue</Button>
+                </Col>
+            </div>
+            <div>
+                {items && <ListGroup>
+                    <h1>Item List</h1>
+                        {items.map((item)=>(
+                            <ListGroupItem>
+                                <span>
+                                    {item.itemName}
+                                </span>
+                                <Input placeholder="quantity" value={ item.itemQty } min={ 0 } max={ 100 } type="number" step="1" onChange={ (e)=>setItemQty(e.target.value) } />
+                            </ListGroupItem>
+                ))}
+                    </ListGroup>}
+            </div>
+        </>
     );
 };
 
