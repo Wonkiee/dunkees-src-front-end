@@ -3,18 +3,20 @@ import { Col, Button, Form, Input,  ListGroup, ListGroupItem, Label,Row, FormGro
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 
-const ItemList=({ items })=>{
-    const onClickEdit=()=>{
-        console.log('edit')
+const ItemList=({ items,deleteItem, editItem })=>{
+    const onClickEdit=(e)=>{
+        const index=e.target.parentNode.parentNode.dataset.index;
+        editItem(parseInt(index));
     }
     
-    const onClickDelete=()=>{
-        console.log('delete')
+    const onClickDelete=(e)=>{
+      const index=e.target.parentNode.parentNode.dataset.index;
+      deleteItem(parseInt(index));
     }
 
 return(
     <>
-        {items &&
+        {items.length>0 &&
         <ListGroup>
             <h1>Item List</h1>
             <ListGroupItem>
@@ -25,13 +27,13 @@ return(
                     <Col></Col>
                 </Row>
             </ListGroupItem>
-            {items.map((item)=>(
-                <ListGroupItem>
+            {items.map((item,index)=>(
+                <ListGroupItem key={ index }>
                     <Row>
                         <Col> {item.itemName}</Col>
                         <Col> {item.itemQty}</Col>
                         <Col> {item.brand}</Col>
-                        <Col>
+                        <Col data-index={ index } >
                             <FontAwesomeIcon icon={ faEdit  } onClick={ onClickEdit }/>
                             <FontAwesomeIcon icon={ faTrash  } onClick={ onClickDelete }/>
                         </Col>
